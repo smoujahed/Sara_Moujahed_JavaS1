@@ -6,7 +6,7 @@ public class ArrayFunReverseIt {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         int[] numbers = {1, 2, 3, 4, 5};
-        int[] reverse = new int[5];
+        int[] reverse = new int[numbers.length];
         String stringIn;
         int revIndexCounter = 0;
 

@@ -4,11 +4,11 @@ import java.util.Scanner;
 
 public class MonthConverterIf {
     public static void main(String[] args) {
-        convertMonth();
-
-    }
-
-    public static void convertMonth () {
+//        convertMonth();
+//
+//    }
+//
+//    public static void convertMonth () {
         Scanner scan = new Scanner(System.in);
         System.out.println("Enter number 1-12 to show corresponding month");
         int input = Integer.parseInt(scan.nextLine());

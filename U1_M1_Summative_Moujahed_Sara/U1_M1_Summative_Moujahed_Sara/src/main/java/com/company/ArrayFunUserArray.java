@@ -15,7 +15,7 @@ public class ArrayFunUserArray {
             numbers[i] = Integer.parseInt(stringIn);
         }
         for (int i = 0; i<numbers.length; i++) {
-            System.out.println("Index " + i + " = " + numbers[i]);
+            System.out.println(numbers[i]);
         }
 
     }
