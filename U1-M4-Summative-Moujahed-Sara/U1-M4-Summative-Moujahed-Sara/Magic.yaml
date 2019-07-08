@@ -1,0 +1,35 @@
+openapi: 3.0.0
+info:
+  title: Magic 8-ball API
+  description: A simple service that returns a random answer and the question asked
+  version: 0.0.1
+servers: 
+    - url: http://localhost:8080
+      description: Local dev server
+paths:
+  /magic/:
+    post:
+      summary: returns an answer
+      description: generates a random number and returns the 8-ball themed answer associated with that number
+      requestBody:
+        description: a question
+        required: true
+        content:
+          application/json:
+            schema:
+              type: string
+      responses:
+        '200':
+          description: answer and correspoding question
+          content:
+            application/json:
+              schema:
+               $ref: '#/components/schemas/Magic'
+components:
+  schemas:
+    Magic:
+      properties:
+        question:
+          type: string
+        answer: 
+          type: string
