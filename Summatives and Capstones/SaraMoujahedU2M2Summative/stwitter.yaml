@@ -1,0 +1,224 @@
+openapi: 3.0.0
+info:
+  title: Stwitter API
+  description: Manages posts and their comments
+  version: 0.0.1
+servers: 
+    - url: http://localhost:8889
+      description: Local dev server
+paths:
+  /posts/:
+    post:
+      summary: Creates a new post entry with given info
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Post'
+      responses:
+        '201':
+          description: post created
+          content:
+            application/json:
+              schema:
+               $ref: '#/components/schemas/Post'
+        '400':
+          description: Invalid request syntax.
+        '422':
+          description: Incomplete post information. Some required fields missing.
+    get:
+      summary: Retrieves all post entries 
+      responses:
+        '200':
+          description: all posts
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+          
+  /post/{id}:
+    get:
+      summary: Retrieves the entry for the post with the given ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the post to retrieve
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      responses:
+        '200':
+          description: post object matching given ID
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+                
+    delete:
+      summary: Deletes the entry for the post with the given ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the post to delete
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      responses:
+        '200':
+          description: post successfully deleted
+    put:
+      summary: Updated the entry for the post with the given ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the post you would like to update
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Post'
+      responses:
+        '200':
+          description: post successfully updated.
+        '422':
+          description: post on path mush match the ID in the post object
+   
+  /post/poster/{poster}:
+    get:
+      summary: Retrieves the entry for the post with the given poster
+      parameters:
+        - name: poster
+          in: path
+          required: true
+          description: ID of the post to retrieve
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      responses:
+        '200':
+          description: post object matching given ID
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+                
+  /comment/{id}:
+    get:
+      summary: Retrieves the entry for the comment with the given ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the comment to retrieve
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      responses:
+        '200':
+          description: comment object matching given ID
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+                
+    delete:
+      summary: Deletes the entry for the comment with the given ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the comment to delete
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      responses:
+        '200':
+          description: comment successfully deleted
+    put:
+      summary: Updated the entry for the comment with the given ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the comment you would like to update
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Comment'
+      responses:
+        '200':
+          description: comment successfully updated.
+        '422':
+          description: comment on path mush match the ID in the comment object
+   
+  /comment/post/{poster}:
+    get:
+      summary: Retrieves the entry for the comment with the given poster
+      parameters:
+        - name: poster
+          in: path
+          required: true
+          description: ID of the post to retrieve comments for
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      responses:
+        '200':
+          description: comment object matching given ID
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+                
+components:
+  schemas:
+    Post:
+      properties:
+        postId:
+          type: integer
+        postDate:
+          type: object
+        posterName:
+          type: string
+        post:
+          type: string
+        comments:
+          type: array
+    Comment:
+      properties:
+        commentId:
+          type: integer
+        postId:
+          type: integer
+        createDate:
+          type: object
+        commenterName:
+          type: string
+        comment:
+          type: string
+
+        
+        
+        
+        
